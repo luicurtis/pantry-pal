@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pantry_pal/utils/constants.dart';
 import 'package:pantry_pal/pages/add_entry.dart';
+import 'package:pantry_pal/model/item.dart';
 
 class Inventory extends StatefulWidget {
   @override
@@ -9,35 +10,36 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
+  // TODO: Will need to refactor to use as the class Item
   var items = [
-    {"item": "Pasta",
+    {"name": "Pasta",
       "quantity": 10,
       "shelfNum": 2 },
-    {"item": "Canned Tomatoes",
+    {"name": "Canned Tomatoes",
       "quantity": 5,
       "shelfNum": 3},
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
-    {"item": "Pasta",
+    {"name": "Pasta",
     "quantity": 10,
     "shelfNum": 2 },
   ];
@@ -49,7 +51,7 @@ class _InventoryState extends State<Inventory> {
         itemCount: items.length,
         itemBuilder: (context, i) {
           return ListTile(
-            title: Text('${items[i]["item"]}'),
+            title: Text('${items[i]["name"]}'),
             subtitle: Text('Quantity: ${items[i]["quantity"]} \nShelf: ${items[i]["shelfNum"]}'),
             trailing: PopupMenuButton<String>(
               onSelected: (choice) => {
@@ -73,9 +75,9 @@ class _InventoryState extends State<Inventory> {
               },
             ),
             isThreeLine: true,
-            // onTap: () {
-            //   Navigator.pushNamed(context, '/detail', arguments: {"item": items[i]});
-            // },
+            onTap: () {
+              Navigator.pushNamed(context, '/detail', arguments: {"item": items[i]});
+            },
           );
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -83,14 +85,22 @@ class _InventoryState extends State<Inventory> {
       : Center(child: const Text('Add Items!'));
    }
 
-   void addItem() {
-     Navigator.of(context).push(new MaterialPageRoute<Null>(
+   Future addItem() async {
+    Item save = await Navigator.of(context).push(new MaterialPageRoute<Item>(
       builder: (BuildContext context) {
         return AddEntry();
       },
       fullscreenDialog: true
     ));
-   }
+    if (save != null) {
+    // TODO: Will need to refactor to use as the class Item
+      var newItem = {"name":save.name, "shelfNum":save.shelfNum, "quanity":save.quantity};
+      setState((){
+        items.add(newItem);
+        print(items);
+      });
+    }
+   } 
 
   @override
   Widget build(BuildContext context) {

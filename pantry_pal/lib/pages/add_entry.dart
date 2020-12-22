@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pantry_pal/model/item.dart';
 
 class AddEntry extends StatefulWidget {
   @override
@@ -8,16 +9,15 @@ class AddEntry extends StatefulWidget {
 class _AddEntryState extends State<AddEntry> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Adding New Item'),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: const Text('New entry'),
         actions: [
-          FlatButton(
-            onPressed: () {
-              //TODO: Handle save
-            },
-            child: Text('SAVE')
-            )
+          new FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop(Item(name: "test", quantity: 1, shelfNum: 1));},
+              child: new Text('SAVE')
+          ),
         ],
       ),
       body: new Text("Foo"),

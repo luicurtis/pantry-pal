@@ -15,7 +15,7 @@ class _DetailState extends State<Detail> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${item["item"]}'),
+        title: Text('${item["name"]}'),
       ),
       body: Row(
         children: [
