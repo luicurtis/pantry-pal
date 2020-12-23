@@ -11,7 +11,7 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   // TODO: Will need to refactor to use as the class Item
-  var items = [
+  static var items = [
     {"name": "Pasta",
       "quantity": 10,
       "shelfNum": 2 },
@@ -94,7 +94,7 @@ class _InventoryState extends State<Inventory> {
     ));
     if (save != null) {
     // TODO: Will need to refactor to use as the class Item
-      var newItem = {"name":save.name, "shelfNum":save.shelfNum, "quanity":save.quantity};
+      var newItem = {"name":save.name, "shelfNum":save.shelfNum, "quantity":save.quantity};
       setState((){
         items.add(newItem);
         print(items);
