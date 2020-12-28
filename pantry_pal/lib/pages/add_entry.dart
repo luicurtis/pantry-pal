@@ -10,10 +10,12 @@ class AddEntry extends StatefulWidget {
 
 class _AddEntryState extends State<AddEntry> {
   DateTime curDateTime = DateTime.now();
-  String name = "";
+  String name = "New Item";
   int shelfNum = 0;
   int quantity = 0;
   String note = "";
+
+  var _controller = TextEditingController();
 
   void showShelfPicker(BuildContext context) {
     showDialog<int>(
@@ -28,16 +30,15 @@ class _AddEntryState extends State<AddEntry> {
       }  
     ).then((value) => {
       if (value != null) {
-        setState(() => shelfNum = value)
+        setState(() { 
+          shelfNum = value;
+          print(name);
+        })
       }
     });
   }
 
   void showQuantityPicker(BuildContext context) {
-    String curName = name;
-    if (curName == '') {
-      curName = "Items";
-    }
     showDialog<int>(
       context: context,
       builder: (BuildContext context) {
@@ -45,7 +46,7 @@ class _AddEntryState extends State<AddEntry> {
           initialIntegerValue: quantity, 
           minValue: 0, 
           maxValue: 100,
-          title: Text('Number of $curName')
+          title: Text('Number of $name')
         );
       }  
     ).then((value) => {
@@ -54,7 +55,6 @@ class _AddEntryState extends State<AddEntry> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,9 +75,13 @@ class _AddEntryState extends State<AddEntry> {
           leading: Icon(Icons.speaker_notes),
           title: TextField(
             decoration: InputDecoration(
-              hintText: 'Item Name'
+              hintText: 'Item Name',
+              suffixIcon: IconButton(
+                onPressed: () => _controller.clear(),
+                icon: Icon(Icons.clear),
+              ),
             ),
-            controller: TextEditingController(text: name),
+            controller: _controller,
             onChanged: (value) => name = value,
           )
         ),
@@ -103,6 +107,3 @@ class _AddEntryState extends State<AddEntry> {
     );
   }
 }
-
-
-//https://fidev.io/full-screen-dialog/
