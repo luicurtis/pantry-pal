@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:pantry_pal/utils/constants.dart';
 import 'package:pantry_pal/pages/add_entry.dart';
 import 'package:pantry_pal/model/item.dart';
@@ -11,37 +10,43 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   // TODO: Will need to refactor to use as the class Item
+  Item pasta = Item(name: "pasta", shelfNum: 4, quantity: 5, lastUpdated:DateTime.now());
+  // static var items = [
+  //   {"name": "Pasta",
+  //     "quantity": 10,
+  //     "shelfNum": 2 },
+  //   {"name": "Canned Tomatoes",
+  //     "quantity": 5,
+  //     "shelfNum": 3},
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  //   {"name": "Pasta",
+  //   "quantity": 10,
+  //   "shelfNum": 2 },
+  // ];
   static var items = [
-    {"name": "Pasta",
-      "quantity": 10,
-      "shelfNum": 2 },
-    {"name": "Canned Tomatoes",
-      "quantity": 5,
-      "shelfNum": 3},
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
-    {"name": "Pasta",
-    "quantity": 10,
-    "shelfNum": 2 },
+    // Item(name: "pasta", shelfNum: 4, quantity: 5, lastUpdated:DateTime.now()),
+    // Item(name: "pasta", shelfNum: 4, quantity: 5, lastUpdated:DateTime.now()),
+    // Item(name: "pasta", shelfNum: 4, quantity: 5, lastUpdated:DateTime.now())
   ];
 
    Widget buildInventory() {
@@ -51,8 +56,8 @@ class _InventoryState extends State<Inventory> {
         itemCount: items.length,
         itemBuilder: (context, i) {
           return ListTile(
-            title: Text('${items[i]["name"]}'),
-            subtitle: Text('Quantity: ${items[i]["quantity"]} \nShelf: ${items[i]["shelfNum"]}'),
+            title: Text('${items[i].name}'),
+            subtitle: Text('Quantity: ${items[i].quantity} \nShelf: ${items[i].shelfNum}'),
             trailing: PopupMenuButton<String>(
               onSelected: (choice) => {
                 if (choice == Constants.Edit) {
@@ -94,9 +99,9 @@ class _InventoryState extends State<Inventory> {
     ));
     if (save != null) {
     // TODO: Will need to refactor to use as the class Item
-      var newItem = {"name":save.name, "shelfNum":save.shelfNum, "quantity":save.quantity};
+      // var newItem = {"name":save.name, "shelfNum":save.shelfNum, "quantity":save.quantity, "lastUpdated":save.lastUpdated};
       setState((){
-        items.add(newItem);
+        items.add(save);
         print(items);
       });
     }
