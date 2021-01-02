@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618061069876",
+    "project_id": "pantry-pal-1e0e2",
+    "storage_bucket": "pantry-pal-1e0e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618061069876:android:6ce82458f00844fd099461",
+        "android_client_info": {
+          "package_name": "com.clui.pantry_pal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618061069876-ojn4bplls3voojvsvsnp9cpk5qit9a0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiVKvrMubVvqTw4acbW500-vTXxPtd3EU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618061069876-ojn4bplls3voojvsvsnp9cpk5qit9a0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
