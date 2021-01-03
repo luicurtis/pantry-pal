@@ -10,8 +10,9 @@ class Item {
 
   // Named Constructor
   // Maps data from Firebase JSON format to Class Item format
+  // NOTE: '??' means if null
   Item.fromMap(Map snapshot, String id) :
-    id = id ?? '', // NOTE: '??' means if null
+    id = id ?? '',
     name = snapshot['name'] ?? 'New Item',
     shelfNum = snapshot['shelfNum'] ?? 'N/A',
     quantity = snapshot['quantity'] ?? 0,
