@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:pantry_pal/locator.dart';
+import 'package:provider/provider.dart';
+import 'ui/router.dart';
+import 'core/viewmodels/inventory.dart';
 
-import 'package:pantry_pal/pages/inventory.dart';
-import 'package:pantry_pal/pages/home.dart';
-import 'package:pantry_pal/pages/detail.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/inventory', // TODO: update this later
-      routes: {
-        '/': (context) => Home(),
-        '/inventory': (context) => Inventory(),
-        '/detail': (context) => Detail(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => locator<Inventory>(),
+          // builder: (_) => )
+        )
+      ],
+      child: MaterialApp(
+        initialRoute: '/',
+        title: 'Pantry Pal',
+        onGenerateRoute: UIRouter.generateRoute,
+      )
     );
   }
 }
