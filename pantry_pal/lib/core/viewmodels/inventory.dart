@@ -13,7 +13,7 @@ class Inventory extends ChangeNotifier {
   Future<List<Item>> fetchItems() async {
     var result = await _db.getDataCollection();
     // for each doc, map it to an Item class
-    items = result.docs.map( (doc) => Item.fromMap(doc.data(), doc.id) ).toList();
+    items = result.docs.map((doc) => Item.fromMap(doc.data(), doc.id)).toList();
     return items;
   }
 

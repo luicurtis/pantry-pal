@@ -1,4 +1,3 @@
-
 import 'package:get_it/get_it.dart';
 import 'core/services/database.dart';
 import 'core/viewmodels/inventory.dart';
@@ -8,7 +7,7 @@ import 'core/viewmodels/inventory.dart';
 GetIt locator = GetIt.instance; // NOTE: GetIt is singleton
 
 // Register objects
-void setupLoacator() {
+void setupLocator() {
   locator.registerLazySingleton(() => Database('inventory'));
   locator.registerLazySingleton(() => Inventory());
 }
