@@ -4,20 +4,16 @@ import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:provider/provider.dart';
 
-class EditItem extends StatefulWidget {
-  final Item item;
-
-  EditItem({this.item});
-
+class AddItem extends StatefulWidget {
   @override
-  _EditItemState createState() => _EditItemState();
+  _AddItemState createState() => _AddItemState();
 }
 
-class _EditItemState extends State<EditItem> {
+class _AddItemState extends State<AddItem> {
   final _formKey = GlobalKey<FormState>();
-  String name = '';
+  String name = 'New Item';
   int quantity = 0;
-  String shelfNum = '';
+  String shelfNum = 'N/A';
 
   @override
   Widget build(BuildContext context) {
@@ -25,31 +21,16 @@ class _EditItemState extends State<EditItem> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Edit Item Details')),
-        actions: [
-          FlatButton(
-            onPressed: () async {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                Item updatedItem = Item(
-                    name: name,
-                    quantity: quantity,
-                    shelfNum: shelfNum,
-                    lastUpdated: DateTime.now());
-                await itemProvider.updateItem(updatedItem, widget.item.id);
-                Navigator.pop(context);
-              }
-            },
-            child: Text('SAVE'),
-          ),
-        ],
+        title: Center(
+          child: Text('Add New Item'),
+        ),
       ),
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
-              initialValue: widget.item.name,
+              initialValue: name,
               decoration: InputDecoration(
                 hintText: 'Item Name',
                 fillColor: Colors.grey[300],
@@ -64,7 +45,7 @@ class _EditItemState extends State<EditItem> {
               onSaved: (value) => name = value,
             ),
             TextFormField(
-              initialValue: widget.item.quantity.toString(),
+              initialValue: quantity.toString(),
               decoration: InputDecoration(
                 hintText: 'Number of Items',
                 fillColor: Colors.grey[300],
@@ -81,13 +62,30 @@ class _EditItemState extends State<EditItem> {
               onSaved: (value) => quantity = int.parse(value),
             ),
             TextFormField(
-              initialValue: widget.item.shelfNum,
+              initialValue: shelfNum,
               decoration: InputDecoration(
                 hintText: 'Shelf',
                 fillColor: Colors.grey[300],
                 filled: true,
               ),
               onSaved: (value) => shelfNum = value,
+            ),
+            RaisedButton(
+              splashColor: Colors.red,
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  Item newItem = Item(
+                      name: name,
+                      quantity: quantity,
+                      shelfNum: shelfNum,
+                      lastUpdated: DateTime.now());
+                  await itemProvider.addItem(newItem);
+                  Navigator.pop(context);
+                }
+              },
+              child: Text('Add Item', style: TextStyle(color: Colors.white)),
+              color: Colors.blue,
             ),
           ],
         ),

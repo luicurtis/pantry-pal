@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pantry_pal/ui/views/addItem.dart';
+import 'package:pantry_pal/ui/views/editItem.dart';
 import 'package:pantry_pal/ui/views/home.dart';
 import 'package:pantry_pal/ui/views/itemDetails.dart';
 

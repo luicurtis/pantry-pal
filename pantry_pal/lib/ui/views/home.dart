@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
+import 'package:pantry_pal/ui/views/addItem.dart';
 import 'package:pantry_pal/ui/widgets/itemTile.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +47,12 @@ class _HomeState extends State<Home> {
             }
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => AddItem()));
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
