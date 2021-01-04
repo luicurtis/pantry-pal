@@ -26,6 +26,9 @@ class Database {
   }
 
   Future<DocumentReference> addDocument(Map data) {
+    print('trying to add?????');
+    print(data);
+    // FIXME: Error with the map
     return ref.add(data);
   }
 

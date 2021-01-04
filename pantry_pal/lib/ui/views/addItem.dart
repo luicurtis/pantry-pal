@@ -79,7 +79,8 @@ class _AddItemState extends State<AddItem> {
                       name: name,
                       quantity: quantity,
                       shelfNum: shelfNum,
-                      lastUpdated: DateTime.now());
+                      lastUpdated: DateTime.now()
+                  );
                   await itemProvider.addItem(newItem);
                   Navigator.pop(context);
                 }

@@ -16,10 +16,10 @@ class Item {
         name = snapshot['name'] ?? 'New Item',
         shelfNum = snapshot['shelfNum'] ?? 'N/A',
         quantity = snapshot['quantity'] ?? 0,
-        lastUpdated = snapshot['lastUpdated'] ?? DateTime.now();
+        lastUpdated = snapshot['lastUpdated'].toDate() ?? DateTime.now();
 
   // Converts Item to JSON format for upload to Firebase
-  Map toJSON() {
+  Map<String, dynamic> toJSON() {
     return {
       "id": id,
       "name": name,

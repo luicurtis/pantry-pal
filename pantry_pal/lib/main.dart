@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/locator.dart';
 import 'package:provider/provider.dart';
 import 'ui/router.dart';
 import 'core/viewmodels/inventory.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -17,12 +20,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => locator<Inventory>(),
-          // builder: (_) => )
         )
       ],
       child: MaterialApp(
         initialRoute: '/',
         title: 'Pantry Pal',
+        theme: ThemeData(),
         onGenerateRoute: UIRouter.generateRoute,
       )
     );

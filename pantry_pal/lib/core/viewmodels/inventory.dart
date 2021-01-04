@@ -37,7 +37,10 @@ class Inventory extends ChangeNotifier {
   }
 
   Future addItem(Item data) async {
-    var result = await _db.addDocument(data.toJSON());
+    print('made it in');
+    print(data.toJSON());
+    await _db.addDocument(data.toJSON());
+    print('done adding');
     // TODO: Check result
     return;
   }
