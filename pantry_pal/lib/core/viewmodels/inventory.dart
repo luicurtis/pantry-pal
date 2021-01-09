@@ -37,10 +37,9 @@ class Inventory extends ChangeNotifier {
   }
 
   Future addItem(Item data) async {
-    // Get random ID for the new item
-    var id = _db.ref.doc().id;
-    data.id = id;
-    await _db.addDocument(data.toJSON());
+    var docRef = await _db.addDocument(data.toJSON());
+    data.id = docRef.id;
+    await _db.updateDocument(data.toJSON(), docRef.id);
     // TODO: Check result
     return;
   }

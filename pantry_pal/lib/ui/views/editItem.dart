@@ -32,6 +32,7 @@ class _EditItemState extends State<EditItem> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 Item updatedItem = Item(
+                    id: widget.item.id,
                     name: name,
                     quantity: quantity,
                     shelfNum: shelfNum,
