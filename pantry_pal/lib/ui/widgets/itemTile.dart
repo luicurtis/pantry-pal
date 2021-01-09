@@ -16,7 +16,7 @@ class ItemTile extends StatelessWidget {
         'Quantity: ${itemDetails.quantity}\nShelf: ${itemDetails.shelfNum}',
       ),
       isThreeLine: true,
-      trailing: ItemPopMenu(),
+      trailing: ItemPopMenu(item: itemDetails),
       onTap: () {
         Navigator.push(
           context,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
-import 'package:pantry_pal/ui/views/itemDetails.dart';
+import 'package:pantry_pal/ui/views/editItem.dart';
 import 'package:provider/provider.dart';
 
 class ItemPopMenu extends StatelessWidget {
@@ -23,12 +23,16 @@ class ItemPopMenu extends StatelessWidget {
         }).toList();
       },
       onSelected: (choice) async {
+        print(choice);
+        print(item);
         if (choice == 'Edit') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => ItemDetails(itemDetails: item)),
+            MaterialPageRoute(builder: (_) => EditItem(item: item)),
           );
         } else if (choice == 'Delete') {
+          print('deleting');
+          print(item.id);
           await itemProvider.removeItem(item.id);
         }
       },
