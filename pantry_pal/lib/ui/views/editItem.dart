@@ -39,7 +39,7 @@ class _EditItemState extends State<EditItem> {
                     shelfNum: shelfNum,
                     lastUpdated: DateTime.now());
                 await itemProvider.updateItem(updatedItem, widget.item.id);
-                Navigator.pop(context);
+                Navigator.pop(context, updatedItem);
               }
             },
             child: Text('SAVE'),

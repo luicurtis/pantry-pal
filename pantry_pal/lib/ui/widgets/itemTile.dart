@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/ui/views/itemDetails.dart';
-import 'package:pantry_pal/ui/widgets/itemPopmenu.dart';
+// import 'package:pantry_pal/ui/widgets/itemPopmenu.dart';
 
 class ItemTile extends StatelessWidget {
   final Item itemDetails;
@@ -16,7 +16,7 @@ class ItemTile extends StatelessWidget {
         'Quantity: ${itemDetails.quantity}\nShelf: ${itemDetails.shelfNum}',
       ),
       isThreeLine: true,
-      trailing: ItemPopMenu(item: itemDetails),
+      // trailing: ItemPopMenu(item: itemDetails),
       onTap: () {
         Navigator.push(
           context,
