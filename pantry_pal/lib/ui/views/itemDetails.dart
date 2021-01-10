@@ -16,6 +16,7 @@ class ItemDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${itemDetails.name}'),
+        centerTitle: true,
         actions: [
           IconButton(
             iconSize: 35,

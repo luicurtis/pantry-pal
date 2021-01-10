@@ -25,7 +25,8 @@ class _EditItemState extends State<EditItem> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Edit Item Details')),
+        title: Text('Edit Item Details'),
+        centerTitle: true,
         actions: [
           FlatButton(
             onPressed: () async {

@@ -21,9 +21,8 @@ class _AddItemState extends State<AddItem> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('Add New Item'),
-        ),
+        title: Text('Add New Item'),
+        centerTitle: true,
       ),
       body: Form(
         key: _formKey,
@@ -85,7 +84,7 @@ class _AddItemState extends State<AddItem> {
                   Navigator.pop(context);
                 }
               },
-              child: Text('Add Item', style: TextStyle(color: Colors.white)),
+              child: Text('Done', style: TextStyle(color: Colors.white)),
               color: Colors.blue,
             ),
           ],

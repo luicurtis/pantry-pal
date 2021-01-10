@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
               items = snapshot.data.docs
                   .map((doc) => Item.fromMap(doc.data(), doc.id))
                   .toList();
+              items.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
               if (items.length > 0) {
                 return ListView.separated(
