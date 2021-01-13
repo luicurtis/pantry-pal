@@ -11,7 +11,19 @@ class ItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text('${itemDetails.name}'),
+      // TODO: add logic to display picture or number of items in leading box
+      leading: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        child: Text(
+          '${itemDetails.quantity}',
+          style: TextStyle(fontSize: 100.0),
+        ),
+      ),
+      title: Text(
+        '${itemDetails.name}',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
       subtitle: Text(
         'Quantity: ${itemDetails.quantity}\nShelf: ${itemDetails.shelfNum}',
       ),
