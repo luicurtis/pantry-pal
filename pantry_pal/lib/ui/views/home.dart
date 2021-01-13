@@ -4,7 +4,10 @@ import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
 import 'package:pantry_pal/ui/widgets/itemTile.dart';
+import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -38,7 +41,9 @@ class _HomeState extends State<Home> {
                   itemCount: items.length,
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(),
-                  itemBuilder: (context, i) => ItemTile(itemDetails: items[i]),
+                  itemBuilder: (context, i) {
+                    return slidableTile(context, items[i]);
+                  },
                 );
               }
               return Center(child: const Text('Add Items!'));

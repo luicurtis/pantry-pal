@@ -15,7 +15,7 @@ class ItemTile extends StatelessWidget {
       leading: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.center,
-        child: Text(
+        child: Text(  
           '${itemDetails.quantity}',
           style: TextStyle(fontSize: 100.0),
         ),
