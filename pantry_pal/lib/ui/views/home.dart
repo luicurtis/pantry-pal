@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
-import 'package:pantry_pal/ui/widgets/itemTile.dart';
 import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -32,7 +30,8 @@ class _HomeState extends State<Home> {
               items = snapshot.data.docs
                   .map((doc) => Item.fromMap(doc.data(), doc.id))
                   .toList();
-              items.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+              items.sort((a, b) =>
+                  a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
               if (items.length > 0) {
                 return ListView.separated(
@@ -48,8 +47,22 @@ class _HomeState extends State<Home> {
               }
               return Center(child: const Text('Add Items!'));
             } else {
-              // TODO: replace this with a loading animation
-              return Text('Fetching Inventory');
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Fetching Inventory',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 25),
+                    SpinKitRing(
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              );
             }
           },
         ),
