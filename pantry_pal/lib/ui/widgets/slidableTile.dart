@@ -4,24 +4,34 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/ui/widgets/itemTile.dart';
 
-Widget slidableTile (BuildContext context, Item item) {
+Widget slidableTile(BuildContext context, Item item) {
   return Slidable(
     key: Key(item.id),
-    child: ItemTile(itemDetails: item,), 
+    child: ItemTile(
+      itemDetails: item,
+    ),
     actionPane: SlidableDrawerActionPane(),
     actions: <Widget>[
-      IconSlideAction(
-        caption: 'Archive',
-        color: Colors.blue,
-        icon: Icons.archive,
-        // onTap: () => _showSnackBar('Archive'),
-      ),
-      IconSlideAction(
-        caption: 'Share',
-        color: Colors.indigo,
-        icon: Icons.share,
-        // onTap: () => _showSnackBar('Share'),
-      ),
+      Column(
+        children: [
+          Expanded(
+            child: IconSlideAction(
+                // caption: '- 1',
+                color: Colors.green[200],
+                icon: Icons.add
+                // onTap: () => _showSnackBar('Share'),
+                ),
+          ),
+          Expanded(
+            child: IconSlideAction(
+              // caption: '+ 1',
+              color: Colors.red[200],
+              icon: Icons.remove,
+              // onTap: () => _showSnackBar('Archive'),
+            ),
+          )
+        ],
+      )
     ],
     secondaryActions: <Widget>[
       IconSlideAction(
