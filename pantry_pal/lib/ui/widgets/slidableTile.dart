@@ -49,7 +49,6 @@ Widget slidableTile(
           ),
           Expanded(
             child: IconSlideAction(
-              // caption: '+ 1',
               color: Colors.red[300],
               icon: Icons.remove,
               onTap: () async {

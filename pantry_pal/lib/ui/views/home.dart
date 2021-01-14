@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
+import 'package:pantry_pal/ui/views/search.dart';
 import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,7 +23,16 @@ class _HomeState extends State<Home> {
     final itemProvider = Provider.of<Inventory>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Inventory')),
+        centerTitle: true,
+        title: Text('Inventory'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: Search(context));
+            },
+          ),
+        ],
       ),
       body: Container(
         child: StreamBuilder(

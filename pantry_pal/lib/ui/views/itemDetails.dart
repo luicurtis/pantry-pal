@@ -60,6 +60,7 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          // TODO: update this function to use async query streams
           Item editedItem = await Navigator.push(
               context, MaterialPageRoute(builder: (_) => EditItem(item: item)));
           if (editedItem != null) {
