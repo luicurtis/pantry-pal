@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
@@ -13,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final SlidableController slidableController = SlidableController();
   List<Item> items;
 
   @override
@@ -41,7 +43,7 @@ class _HomeState extends State<Home> {
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(),
                   itemBuilder: (context, i) {
-                    return slidableTile(context, items[i]);
+                    return slidableTile(context, items[i], slidableController);
                   },
                 );
               }
