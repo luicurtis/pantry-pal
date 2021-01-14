@@ -61,15 +61,18 @@ class Search extends SearchDelegate {
             suggestionList.addAll(allItems
               .where((element) => element.name.toLowerCase().contains(query)));
           }
-          print(suggestionList);
-          return ListView.builder(
-            itemCount: suggestionList.length,
-            itemBuilder: (context, i) {
-              return ItemTile(
-                itemDetails: suggestionList[i],
-              );
-            },
-          );
+
+          if (suggestionList.length > 0) {
+            return ListView.builder(
+              itemCount: suggestionList.length,
+              itemBuilder: (context, i) {
+                return ItemTile(
+                  itemDetails: suggestionList[i],
+                );
+              },
+            );
+          }
+          return Center(child: Text('No Items named: $query'));
         }
         return Center(child: Text('Search for Items!'));
       },
