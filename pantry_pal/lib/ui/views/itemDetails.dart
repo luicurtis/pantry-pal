@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/editItem.dart';
+import 'package:pantry_pal/ui/widgets/alertDialog.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -35,9 +36,14 @@ class _ItemDetailsState extends State<ItemDetails> {
           IconButton(
             iconSize: 35,
             icon: Icon(Icons.delete_forever),
-            onPressed: () async {
-              await itemProvider.removeItem(item.id);
-              Navigator.pop(context);
+            onPressed: ()  {
+              return showDialog<bool>(
+                context: context,
+                builder: (context) {
+                  return alertDialog(context, itemProvider, item);
+                },
+              );
+              // Navigator.pop(context);
             },
           ),
         ],

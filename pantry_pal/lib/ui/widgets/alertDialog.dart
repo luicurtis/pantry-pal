@@ -6,7 +6,7 @@ import 'package:pantry_pal/core/viewmodels/inventory.dart';
 Widget alertDialog(BuildContext context, Inventory itemProvider, Item item) {
   return AlertDialog(
     title: Text('Delete'),
-    content: Text('Item will be deleted'),
+    content: Text('${item.name} will be deleted'),
     actions: <Widget>[
       FlatButton(
         child: Text('Cancel'),
@@ -16,7 +16,7 @@ Widget alertDialog(BuildContext context, Inventory itemProvider, Item item) {
         child: Text('Ok'),
         onPressed: () {
           itemProvider.removeItem(item.id);
-          Navigator.of(context).pop();
+          Navigator.of(context).popUntil((route) => route.isFirst);
         },
       )
     ],
