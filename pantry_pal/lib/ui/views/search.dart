@@ -42,7 +42,7 @@ class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<Item> suggestionList = [];
-    // FIXME: Find a way to avoid using this dank method
+    // TODO:FIXME: Find a way to avoid using this dank method
     // using "updated" bool to prevent updaing the suggestion list since query.isNotEmpty
     // cannot be updated immediately after typing (there's delay)
     bool updated = false; 

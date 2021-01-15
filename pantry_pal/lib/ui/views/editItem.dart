@@ -57,6 +57,7 @@ class _EditItemState extends State<EditItem> {
                 fillColor: Colors.grey[300],
                 filled: true,
               ),
+              textCapitalization: TextCapitalization.words,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter the item name';
@@ -74,6 +75,7 @@ class _EditItemState extends State<EditItem> {
               ),
               keyboardType: TextInputType.numberWithOptions(signed: false),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              textCapitalization: TextCapitalization.sentences,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please the number of items';

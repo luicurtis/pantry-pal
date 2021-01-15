@@ -29,12 +29,13 @@ class _AddItemState extends State<AddItem> {
         child: Column(
           children: [
             TextFormField(
-              initialValue: name,
+              // initialValue: name,
               decoration: InputDecoration(
                 hintText: 'Item Name',
                 fillColor: Colors.grey[300],
                 filled: true,
               ),
+              textCapitalization: TextCapitalization.words,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter the item name';
@@ -44,7 +45,6 @@ class _AddItemState extends State<AddItem> {
               onSaved: (value) => name = value,
             ),
             TextFormField(
-              initialValue: quantity.toString(),
               decoration: InputDecoration(
                 hintText: 'Number of Items',
                 fillColor: Colors.grey[300],
@@ -61,12 +61,12 @@ class _AddItemState extends State<AddItem> {
               onSaved: (value) => quantity = int.parse(value),
             ),
             TextFormField(
-              initialValue: shelfNum,
               decoration: InputDecoration(
                 hintText: 'Shelf',
                 fillColor: Colors.grey[300],
                 filled: true,
               ),
+              textCapitalization: TextCapitalization.sentences,
               onSaved: (value) => shelfNum = value,
             ),
             RaisedButton(
