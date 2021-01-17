@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
 
                     return Text(
                       "${items[currentIdx].name[0].toUpperCase()}",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: Colors.black),
                     );
                   },
                   labelConstraints: BoxConstraints(maxHeight: 30, maxWidth: 30),
