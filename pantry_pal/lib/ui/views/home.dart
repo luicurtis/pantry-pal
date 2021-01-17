@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
@@ -16,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final SlidableController slidableController = SlidableController();
+  final ScrollController _semicircleController = ScrollController();
   List<Item> items;
 
   @override
@@ -46,15 +48,37 @@ class _HomeState extends State<Home> {
                   a.name.toLowerCase().compareTo(b.name.toLowerCase()));
 
               if (items.length > 0) {
-                return ListView.separated(
-                  padding: const EdgeInsets.only(
-                      bottom: kFloatingActionButtonMargin + 48),
-                  itemCount: items.length,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
-                  itemBuilder: (context, i) {
-                    return slidableTile(context, items[i], slidableController);
+                return DraggableScrollbar.semicircle(
+                  controller: _semicircleController,
+                  labelTextBuilder: (offset) {
+                    final int currentIdx = _semicircleController.hasClients
+                        ? (_semicircleController.offset /
+                                (_semicircleController
+                                        .position.maxScrollExtent -
+                                    kFloatingActionButtonMargin +
+                                    48) *
+                                items.length)
+                            .floor()
+                        : 0;
+
+                    return Text(
+                      "${items[currentIdx].name[0].toUpperCase()}",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                    );
                   },
+                  labelConstraints: BoxConstraints(maxHeight: 30, maxWidth: 30),
+                  child: ListView.separated(
+                    controller: _semicircleController,
+                    padding: const EdgeInsets.only(
+                        bottom: kFloatingActionButtonMargin + 48),
+                    itemCount: items.length,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                    itemBuilder: (context, i) {
+                      return slidableTile(
+                          context, items[i], slidableController);
+                    },
+                  ),
                 );
               }
               return Center(child: const Text('Add Items!'));
