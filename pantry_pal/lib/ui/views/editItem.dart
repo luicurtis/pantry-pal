@@ -54,7 +54,6 @@ class _EditItemState extends State<EditItem> {
               initialValue: widget.item.name,
               decoration: InputDecoration(
                 hintText: 'Item Name',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               textCapitalization: TextCapitalization.words,
@@ -70,7 +69,6 @@ class _EditItemState extends State<EditItem> {
               initialValue: widget.item.quantity.toString(),
               decoration: InputDecoration(
                 hintText: 'Number of Items',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               keyboardType: TextInputType.numberWithOptions(signed: false),
@@ -88,7 +86,6 @@ class _EditItemState extends State<EditItem> {
               initialValue: widget.item.shelfNum,
               decoration: InputDecoration(
                 hintText: 'Shelf',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               onSaved: (value) => shelfNum = value,

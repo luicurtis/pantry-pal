@@ -32,7 +32,6 @@ class _AddItemState extends State<AddItem> {
               // initialValue: name,
               decoration: InputDecoration(
                 hintText: 'Item Name',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               textCapitalization: TextCapitalization.words,
@@ -47,7 +46,6 @@ class _AddItemState extends State<AddItem> {
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Number of Items',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               keyboardType: TextInputType.numberWithOptions(signed: false),
@@ -63,7 +61,6 @@ class _AddItemState extends State<AddItem> {
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Shelf',
-                fillColor: Colors.grey[300],
                 filled: true,
               ),
               textCapitalization: TextCapitalization.sentences,
