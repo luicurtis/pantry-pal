@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         title: 'Pantry Pal',
         theme: ThemeData(),
+        darkTheme: ThemeData.dark(),
         onGenerateRoute: UIRouter.generateRoute,
       )
     );
