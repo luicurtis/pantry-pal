@@ -5,9 +5,9 @@ import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
 import 'package:pantry_pal/ui/views/search.dart';
+import 'package:pantry_pal/ui/widgets/fetchingInventoryAnimation.dart';
 import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -59,22 +59,7 @@ class _HomeState extends State<Home> {
               }
               return Center(child: const Text('Add Items!'));
             } else {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Fetching Inventory',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(height: 25),
-                    SpinKitRing(
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-              );
+              return fetchingInventoryAnimation();
             }
           },
         ),
