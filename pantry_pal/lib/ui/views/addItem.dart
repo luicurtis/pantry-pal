@@ -1,7 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
+import 'package:pantry_pal/ui/views/takePicture.dart';
 import 'package:provider/provider.dart';
 
 class AddItem extends StatefulWidget {
@@ -67,6 +69,22 @@ class _AddItemState extends State<AddItem> {
               onSaved: (value) => shelfNum = value,
             ),
             RaisedButton(
+              onPressed: () async {
+                // Obtain a list of the available cameras on the device.
+                final cameras = await availableCameras();
+                // Get a specific camera from the list of available cameras.
+                final firstCamera = cameras.first;
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => TakePicture(camera: firstCamera),
+                  ),
+                );
+              },
+              child: Text('Add Image', style: TextStyle(color: Colors.white)),
+              color: Colors.blue,
+            ),
+            RaisedButton(
               splashColor: Colors.red,
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
@@ -75,8 +93,7 @@ class _AddItemState extends State<AddItem> {
                       name: name,
                       quantity: quantity,
                       shelfNum: shelfNum,
-                      lastUpdated: DateTime.now()
-                  );
+                      lastUpdated: DateTime.now());
                   await itemProvider.addItem(newItem);
                   Navigator.pop(context);
                 }
