@@ -16,7 +16,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final SlidableController slidableController = SlidableController();
   final ScrollController _semicircleController = ScrollController();
   List<Item> items;
 
@@ -76,7 +75,7 @@ class _HomeState extends State<Home> {
                         const Divider(),
                     itemBuilder: (context, i) {
                       return slidableTile(
-                          context, items[i], slidableController);
+                          context, items[i]);
                     },
                   ),
                 );

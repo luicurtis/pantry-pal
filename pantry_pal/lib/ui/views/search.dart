@@ -11,8 +11,6 @@ class Search extends SearchDelegate {
   BuildContext context;
   List<Item> suggestionList = [];
 
-  final SlidableController slidableController = SlidableController();
-
   Search(this.context);
 
   @override
@@ -70,7 +68,7 @@ class Search extends SearchDelegate {
                   const Divider(),
               itemBuilder: (context, i) {
                 return slidableTile(
-                    context, suggestionList[i], slidableController);
+                    context, suggestionList[i]);
               },
             );
           }
