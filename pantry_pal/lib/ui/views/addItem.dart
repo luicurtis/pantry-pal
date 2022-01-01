@@ -36,12 +36,12 @@ class _AddItemState extends State<AddItem> {
               ),
               textCapitalization: TextCapitalization.words,
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please enter the item name';
                 }
                 return null;
               },
-              onSaved: (value) => name = value,
+              onSaved: (value) => name = value ?? 'New Item',
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -51,12 +51,13 @@ class _AddItemState extends State<AddItem> {
               keyboardType: TextInputType.numberWithOptions(signed: false),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please the number of items';
                 }
                 return null;
               },
-              onSaved: (value) => quantity = int.parse(value),
+              onSaved: (value) =>
+                  quantity = (value != null) ? int.parse(value) : 0,
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -64,25 +65,19 @@ class _AddItemState extends State<AddItem> {
                 filled: true,
               ),
               textCapitalization: TextCapitalization.sentences,
-              onSaved: (value) => shelfNum = value,
+              onSaved: (value) => shelfNum = value ?? "N/A",
             ),
-            RaisedButton(
-              splashColor: Colors.red,
+            ElevatedButton(
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
-                  Item newItem = Item(
-                      name: name,
-                      quantity: quantity,
-                      shelfNum: shelfNum,
-                      lastUpdated: DateTime.now()
-                  );
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  Item newItem =
+                      Item.noID(name, shelfNum, quantity, DateTime.now());
                   await itemProvider.addItem(newItem);
                   Navigator.pop(context);
                 }
               },
               child: Text('Done', style: TextStyle(color: Colors.white)),
-              color: Colors.blue,
             ),
           ],
         ),

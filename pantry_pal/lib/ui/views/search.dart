@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
 
 class Search extends SearchDelegate {
-  String selectedResult;
   BuildContext context;
   List<Item> suggestionList = [];
 
@@ -49,8 +47,8 @@ class Search extends SearchDelegate {
       stream: itemProvider.fetchItemAsStream(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData && query.isNotEmpty) {
-          final allItems = snapshot.data.docs
-              .map((doc) => Item.fromMap(doc.data(), doc.id))
+          final allItems = snapshot.data!.docs
+              .map((doc) => Item.fromMap(doc.data() as Map, doc.id))
               .toList();
 
           suggestionList.clear();

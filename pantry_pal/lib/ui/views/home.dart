@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
@@ -17,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final ScrollController _semicircleController = ScrollController();
-  List<Item> items;
+  List<Item> items = [];
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +39,8 @@ class _HomeState extends State<Home> {
           stream: itemProvider.fetchItemAsStream(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
-              items = snapshot.data.docs
-                  .map((doc) => Item.fromMap(doc.data(), doc.id))
+              items = snapshot.data!.docs
+                  .map((doc) => Item.fromMap(doc.data() as Map, doc.id))
                   .toList();
               items.sort((a, b) =>
                   a.name.toLowerCase().compareTo(b.name.toLowerCase()));

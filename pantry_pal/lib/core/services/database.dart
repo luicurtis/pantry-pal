@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
   final FirebaseFirestore _db = FirebaseFirestore.instance; //
-  final String path;
-  CollectionReference ref;
+  String path = "";
+  late CollectionReference ref;
 
-  Database(this.path) {
-    ref = _db.collection(path);
+  Database(String path) {
+    this.path = path;
+    this.ref = _db.collection(path);
   }
 
   Future<QuerySnapshot> getDataCollection() {
@@ -29,7 +30,7 @@ class Database {
     return ref.add(data);
   }
 
-  Future<void> updateDocument(Map data, String id) {
+  Future<void> updateDocument(Map<String, Object> data, String id) {
     return ref.doc(id).update(data);
   }
 }

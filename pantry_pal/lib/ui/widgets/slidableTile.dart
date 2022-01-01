@@ -32,30 +32,25 @@ Widget slidableTile(BuildContext context, Item item) {
           child: Column(
             children: [
               SlidableAction(
-                backgroundColor: Colors.green[300],
+                backgroundColor: Colors.green.shade300,
                 icon: Icons.add,
                 onPressed: (context) async {
-                  Item updatedItem = Item(
-                      id: item.id,
-                      name: item.name,
-                      quantity: (item.quantity + 1),
-                      shelfNum: item.shelfNum,
-                      lastUpdated: DateTime.now());
+                  Item updatedItem = Item(item.id, item.name, item.shelfNum,
+                      (item.quantity + 1), DateTime.now());
                   await itemProvider.updateItem(updatedItem, item.id);
                   _showSnackBar(context, 'Added 1 ${item.name}');
                 },
               ),
               SlidableAction(
-                backgroundColor: Colors.red[300],
+                backgroundColor: Colors.red.shade300,
                 icon: Icons.remove,
                 onPressed: (context) async {
-                  Item updatedItem = Item(
-                      id: item.id,
-                      name: item.name,
-                      quantity:
-                          ((item.quantity - 1) > 0) ? (item.quantity - 1) : 0,
-                      shelfNum: item.shelfNum,
-                      lastUpdated: DateTime.now());
+                  int numItem =
+                      ((item.quantity - 1) > 0) ? (item.quantity - 1) : 0;
+
+                  Item updatedItem = Item(item.id, item.name, item.shelfNum,
+                      numItem, DateTime.now());
+
                   await itemProvider.updateItem(updatedItem, item.id);
 
                   if (updatedItem.quantity > 0) {
@@ -86,7 +81,7 @@ Widget slidableTile(BuildContext context, Item item) {
           backgroundColor: Colors.red,
           icon: Icons.delete,
           onPressed: (context) {
-            return showDialog<bool>(
+            showDialog<bool>(
               context: context,
               builder: (context) {
                 return alertDialog(context, itemProvider, item);
