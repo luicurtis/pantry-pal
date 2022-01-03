@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:pantry_pal/core/model/user.dart';
+import 'package:pantry_pal/core/services/database.dart';
 import 'package:pantry_pal/ui/views/home.dart';
 
 class AuthGate extends StatefulWidget {
@@ -11,10 +13,13 @@ class AuthGate extends StatefulWidget {
 }
 
 class _AuthGateState extends State<AuthGate> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final Database _userDB = Database("users");
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
+      stream: _firebaseAuth.authStateChanges(),
       builder: (context, snapshot) {
         // User is not signed in
         if (!snapshot.hasData) {
@@ -62,7 +67,21 @@ class _AuthGateState extends State<AuthGate> {
           );
         } else {
           // Render your application if authenticated
-          // Navigator.pushReplacementNamed(context, '/sign-in');
+
+          // check if a new user
+          String uid = snapshot.data!.uid;
+          _userDB.checkIfDocExists(uid).then((exists) {
+            if (!exists) {
+              // new user, add it to db collection
+              String? name = snapshot.data!.displayName;
+              String? email = snapshot.data!.email;
+              DateTime? creationTime = snapshot.data!.metadata.creationTime;
+
+              PantryUser newUser = PantryUser(name!, email!, creationTime!);
+              _userDB.setDocument(uid,newUser.toJSON());
+            }
+          });
+
           return Home();
         }
       },
