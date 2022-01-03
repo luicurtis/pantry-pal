@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
 import 'package:pantry_pal/ui/views/home.dart';
-import 'package:pantry_pal/ui/widgets/authGate.dart';
+import 'package:pantry_pal/ui/views/authGate.dart';
 
 // FIXME: Not sure if this is being used or not .. needs more investigation
 class UIRouter {
