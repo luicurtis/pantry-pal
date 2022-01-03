@@ -5,6 +5,7 @@ import 'package:pantry_pal/core/model/item.dart';
 import 'package:pantry_pal/core/viewmodels/inventory.dart';
 import 'package:pantry_pal/ui/views/addItem.dart';
 import 'package:pantry_pal/ui/views/search.dart';
+import 'package:pantry_pal/ui/views/userProfile.dart';
 import 'package:pantry_pal/ui/widgets/fetchingInventoryAnimation.dart';
 import 'package:pantry_pal/ui/widgets/slidableTile.dart';
 import 'package:provider/provider.dart';
@@ -21,11 +22,27 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final itemProvider = Provider.of<Inventory>(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text('Inventory'),
+        automaticallyImplyLeading: false,
         actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            alignment: Alignment.center,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => UserProfile(),
+                ),
+              );
+              // print("signout pressed");
+              // authProvider.signOut();
+            },
+          ),
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
@@ -61,7 +78,10 @@ class _HomeState extends State<Home> {
 
                     return Text(
                       "${items[currentIdx].name[0].toUpperCase()}",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: Colors.black),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26,
+                          color: Colors.black),
                     );
                   },
                   labelConstraints: BoxConstraints(maxHeight: 30, maxWidth: 30),
@@ -73,8 +93,7 @@ class _HomeState extends State<Home> {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                     itemBuilder: (context, i) {
-                      return slidableTile(
-                          context, items[i]);
+                      return slidableTile(context, items[i]);
                     },
                   ),
                 );

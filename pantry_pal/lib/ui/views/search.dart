@@ -46,6 +46,8 @@ class Search extends SearchDelegate {
     return StreamBuilder(
       stream: itemProvider.fetchItemAsStream(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        print(query);
+        print(snapshot.hasData);
         if (snapshot.hasData && query.isNotEmpty) {
           final allItems = snapshot.data!.docs
               .map((doc) => Item.fromMap(doc.data() as Map, doc.id))

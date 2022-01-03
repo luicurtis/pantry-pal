@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/locator.dart';
-import 'package:pantry_pal/ui/widgets/authGate.dart';
 import 'package:provider/provider.dart';
 import 'ui/router.dart';
 import 'core/viewmodels/inventory.dart';
@@ -23,16 +23,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // StreamProvider<FirebaseUser>.value(stream: FirebaseAuth.instance.onAuthStateChanged)
+        // Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance),),
         ChangeNotifierProvider(
           create: (_) => locator<Inventory>(),
         )
       ],
       child: MaterialApp(
-        home: AuthGate(),
-        initialRoute: '/',
         title: 'Pantry Pal',
         theme: ThemeData(),
         darkTheme: ThemeData.dark(),
+        initialRoute: FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/home',
         onGenerateRoute: UIRouter.generateRoute,
       )
     );
