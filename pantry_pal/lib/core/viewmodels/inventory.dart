@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,12 +7,12 @@ import 'package:pantry_pal/locator.dart';
 
 class Inventory extends ChangeNotifier {
   Database _db = locator<Database>();
-  List<Item> items;
+  List<Item> items = [];
 
   Future<List<Item>> fetchItems() async {
     var result = await _db.getDataCollection();
     // for each doc, map it to an Item class
-    items = result.docs.map((doc) => Item.fromMap(doc.data(), doc.id)).toList();
+    items = result.docs.map((doc) => Item.fromMap(doc.data() as Map<dynamic, dynamic> , doc.id)).toList();
     return items;
   }
 
@@ -23,7 +22,7 @@ class Inventory extends ChangeNotifier {
 
   Future<Item> getItemById(String id) async {
     var doc = await _db.getDocumentById(id);
-    return Item.fromMap(doc.data(), doc.id);
+    return Item.fromMap(doc.data() as Map<dynamic, dynamic>, doc.id);
   }
 
   Future removeItem(String id) async {

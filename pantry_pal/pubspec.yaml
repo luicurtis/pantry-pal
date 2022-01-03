@@ -18,26 +18,35 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
+  # Icons and animations
+  cupertino_icons: ^1.0.4
+  font_awesome_flutter: ^9.2.0
+  flutter_spinkit: ^5.1.0
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.1
+  # Inputs
+  numberpicker: ^2.1.1
+  flutter_slidable: ^1.2.0
+  draggable_scrollbar: ^0.1.0
 
-  numberpicker: ^1.3.0
-  cloud_firestore: ^0.14.4
-  firebase_core: ^0.5.3
-  provider: ^4.3.2+3
-  get_it: ^5.0.3
-  intl: ^0.16.1
-  flutter_slidable: ^0.5.7
-  flutter_spinkit: "^4.1.2"
-  draggable_scrollbar: ^0.0.4
+  # Auth and Database
+  cloud_firestore: ^3.1.5
+  firebase_core: ^1.10.6
+  firebase_auth: ^3.3.4
+  google_sign_in: ^5.2.1
+  flutterfire_ui: ^0.3.0
+
+  # State Management
+  provider: ^6.0.2
+  get_it: ^7.2.0
+
+  # International Issues (date, time, number formatting, etc.)
+  intl: ^0.17.0
 
 
 dev_dependencies:

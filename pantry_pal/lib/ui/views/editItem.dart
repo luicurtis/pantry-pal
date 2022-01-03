@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class EditItem extends StatefulWidget {
   final Item item;
 
-  EditItem({this.item});
+  EditItem({required this.item});
 
   @override
   _EditItemState createState() => _EditItemState();
@@ -28,16 +28,12 @@ class _EditItemState extends State<EditItem> {
         title: Text('Edit Item Details'),
         centerTitle: true,
         actions: [
-          FlatButton(
+          TextButton(
             onPressed: () async {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
                 Item updatedItem = Item(
-                    id: widget.item.id,
-                    name: name,
-                    quantity: quantity,
-                    shelfNum: shelfNum,
-                    lastUpdated: DateTime.now());
+                    widget.item.id, name, shelfNum, quantity, DateTime.now());
                 await itemProvider.updateItem(updatedItem, widget.item.id);
                 Navigator.pop(context, updatedItem);
               }
@@ -58,12 +54,12 @@ class _EditItemState extends State<EditItem> {
               ),
               textCapitalization: TextCapitalization.words,
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please enter the item name';
                 }
                 return null;
               },
-              onSaved: (value) => name = value,
+              onSaved: (value) => name = value ?? "Edited Item",
             ),
             TextFormField(
               initialValue: widget.item.quantity.toString(),
@@ -75,12 +71,13 @@ class _EditItemState extends State<EditItem> {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               textCapitalization: TextCapitalization.sentences,
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please the number of items';
                 }
                 return null;
               },
-              onSaved: (value) => quantity = int.parse(value),
+              onSaved: (value) =>
+                  quantity = (value != null) ? int.parse(value) : 0,
             ),
             TextFormField(
               initialValue: widget.item.shelfNum,
@@ -88,7 +85,7 @@ class _EditItemState extends State<EditItem> {
                 hintText: 'Shelf',
                 filled: true,
               ),
-              onSaved: (value) => shelfNum = value,
+              onSaved: (value) => shelfNum = value ?? "",
             ),
           ],
         ),

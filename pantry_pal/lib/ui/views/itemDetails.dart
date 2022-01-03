@@ -9,14 +9,14 @@ import 'package:intl/intl.dart';
 class ItemDetails extends StatefulWidget {
   final Item itemDetails;
 
-  ItemDetails({this.itemDetails});
+  ItemDetails({required this.itemDetails});
   @override
   _ItemDetailsState createState() => _ItemDetailsState();
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
   bool edited = false;
-  Item item;
+  late Item item;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +36,8 @@ class _ItemDetailsState extends State<ItemDetails> {
           IconButton(
             iconSize: 35,
             icon: Icon(Icons.delete_forever),
-            onPressed: ()  {
-              return showDialog<bool>(
+            onPressed: () {
+              showDialog(
                 context: context,
                 builder: (context) {
                   return alertDialog(context, itemProvider, item);
@@ -69,12 +69,10 @@ class _ItemDetailsState extends State<ItemDetails> {
           // TODO: update this function to use async query streams
           Item editedItem = await Navigator.push(
               context, MaterialPageRoute(builder: (_) => EditItem(item: item)));
-          if (editedItem != null) {
-            setState(() {
-              edited = true;
-              item = editedItem;
-            });
-          }
+          setState(() {
+            edited = true;
+            item = editedItem;
+          });
         },
         child: Icon(Icons.edit),
       ),
