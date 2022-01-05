@@ -13,7 +13,6 @@ class JoinGroup extends StatefulWidget {
 
 class _JoinGroupState extends State<JoinGroup> {
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   TextEditingController _groupIdController = TextEditingController();
   Database _groupDB = Database("groups");

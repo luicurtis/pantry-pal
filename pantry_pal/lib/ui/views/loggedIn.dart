@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/core/model/group.dart';
 import 'package:pantry_pal/core/model/user.dart';
