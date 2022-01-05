@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:pantry_pal/core/model/user.dart';
 import 'package:pantry_pal/core/services/database.dart';
-import 'package:pantry_pal/ui/views/home.dart';
+import 'package:pantry_pal/core/services/databaseStreams.dart';
+import 'package:pantry_pal/ui/views/loggedIn.dart';
+import 'package:provider/provider.dart';
 
 class AuthGate extends StatefulWidget {
   const AuthGate({Key? key}) : super(key: key);
@@ -18,6 +20,8 @@ class _AuthGateState extends State<AuthGate> {
 
   @override
   Widget build(BuildContext context) {
+    DatabaseStreams _dbStreams = Provider.of<DatabaseStreams>(context);
+
     return StreamBuilder<User?>(
       stream: _firebaseAuth.authStateChanges(),
       builder: (context, snapshot) {
@@ -66,23 +70,27 @@ class _AuthGateState extends State<AuthGate> {
             },
           );
         } else {
-          // Render your application if authenticated
+          String uid = snapshot.data!.uid;
+          String name = snapshot.data!.displayName ?? "";
+          String email = snapshot.data!.email ?? "";
+          DateTime accountCreated = snapshot.data!.metadata.creationTime ?? DateTime.now();
+
+          PantryUser _user = PantryUser.newUser(uid, name, email, accountCreated);
 
           // check if a new user
-          String uid = snapshot.data!.uid;
           _userDB.checkIfDocExists(uid).then((exists) {
             if (!exists) {
               // new user, add it to db collection
-              String? name = snapshot.data!.displayName;
-              String? email = snapshot.data!.email;
-              DateTime? creationTime = snapshot.data!.metadata.creationTime;
-
-              PantryUser newUser = PantryUser(name!, email!, creationTime!);
-              _userDB.setDocument(uid,newUser.toJSON());
+              _userDB.setDocument(uid, _user.toJSON());
             }
           });
 
-          return Home();
+          // Render your application if authenticated
+          return StreamProvider<PantryUser>.value(
+            initialData: _user,
+            value: _dbStreams.getCurrentUser(uid),
+            child: LoggedIn(),
+          );
         }
       },
     );

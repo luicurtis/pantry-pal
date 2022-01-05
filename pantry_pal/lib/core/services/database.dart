@@ -33,6 +33,7 @@ class Database {
   Future<void> updateDocument(Map<String, Object> data, String id) {
     return ref.doc(id).update(data);
   }
+  
   Future<bool> checkIfDocExists(String id) async {
     try {
       var doc = await ref.doc(id).get();
