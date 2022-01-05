@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantry_pal/core/services/databaseStreams.dart';
-import 'core/model/user.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/locator.dart';
