@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pantry_pal/core/services/auth.dart';
-import 'package:pantry_pal/core/services/database.dart';
+import 'package:pantry_pal/core/services/databaseStreams.dart';
+import 'core/model/user.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:pantry_pal/locator.dart';
@@ -23,25 +22,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          // StreamProvider<FirebaseUser>.value(stream: FirebaseAuth.instance.onAuthStateChanged)
-          // Provider<Database>(
-          //   create: (_) => Database("users"),
-          // ),
-          // Provider<Database>(
-          //   create: (_) => Database("inventory"),
-          // ),
-          ChangeNotifierProvider(
-            create: (_) => locator<Inventory>(),
-          )
-        ],
-        child: MaterialApp(
-          title: 'Pantry Pal',
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          initialRoute:
-              FirebaseAuth.instance.currentUser == null ? '/sign-in' : '/home',
-          onGenerateRoute: UIRouter.generateRoute,
-        ));
+      providers: [
+        Provider<DatabaseStreams>(create: (_) => DatabaseStreams()),
+        ChangeNotifierProvider(
+          create: (_) => locator<Inventory>(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Pantry Pal',
+        theme: ThemeData(),
+        darkTheme: ThemeData.dark(),
+        initialRoute: '/sign-in',
+        onGenerateRoute: UIRouter.generateRoute,
+      ),
+    );
   }
 }
